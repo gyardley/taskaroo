@@ -22,6 +22,14 @@ gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views
 gem 'coffee-rails', '~> 4.0.0'
 
+# Use BootStrap for CSS framework
+gem 'bootstrap-sass'
+
+# Use rails_layout to generate Devise layouts files and flash messages.
+group :development do
+  gem 'rails_layout'
+end
+
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 
@@ -38,6 +46,15 @@ group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false
 end
+
+# Use Devise for authentication
+gem 'devise'
+
+# Use AppSignal for errr monitoring.
+# gem 'appsignal'
+
+# Use Cancan for user authorization.
+gem 'cancan'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
