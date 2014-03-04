@@ -56,6 +56,25 @@ gem 'devise'
 # Use Cancan for user authorization.
 gem 'cancan'
 
+# Use RSpec for testing.
+gem 'rspec'
+gem 'rspec-rails'
+
+# Use Database Cleaner to ensure a clean state for testing.
+gem 'database_cleaner'
+
+# Use Faker to help generate development data automatically
+gem 'faker'
+
+# Use Sidekiq to run background processes.
+gem 'sidekiq'
+
+# Use Devise-twitter to connect Devise to Twitter.
+gem 'devise-twitter'
+
+# Use twitter to interface with Twitter API using Ruby.
+gem 'twitter'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 
