@@ -75,6 +75,12 @@ gem 'devise-twitter'
 # Use twitter to interface with Twitter API using Ruby.
 gem 'twitter'
 
+# Use Figaro for handling credentials.
+gem 'figaro'
+
+# Use Letter Opener for previewing email in the browser instead of sending it.
+gem "letter_opener", :group => :development
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 
