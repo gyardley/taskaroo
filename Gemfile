@@ -54,7 +54,7 @@ gem 'devise'
 # gem 'appsignal'
 
 # Use Cancan for user authorization.
-gem 'cancan'
+# gem 'cancan'
 
 # Use RSpec for testing.
 gem 'rspec'
@@ -69,11 +69,13 @@ gem 'faker'
 # Use Sidekiq to run background processes.
 gem 'sidekiq'
 
+# gem 'omniauth-twitter'
+
 # Use Devise-twitter to connect Devise to Twitter.
-gem 'devise-twitter'
+# gem 'devise-twitter'
 
 # Use twitter to interface with Twitter API using Ruby.
-gem 'twitter'
+# gem 'twitter'
 
 # Use Figaro for handling credentials.
 gem 'figaro'

@@ -1,4 +1,5 @@
 Blocitoff::Application.routes.draw do
+  devise_for :users
   get "welcome/index"
   get "about", to: "welcome#about"
 
