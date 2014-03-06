@@ -69,7 +69,7 @@ gem 'faker'
 # Use Sidekiq to run background processes.
 gem 'sidekiq'
 
-# gem 'omniauth-twitter'
+gem 'omniauth-twitter'
 
 # Use Devise-twitter to connect Devise to Twitter.
 # gem 'devise-twitter'
