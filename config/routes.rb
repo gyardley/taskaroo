@@ -1,5 +1,5 @@
 Blocitoff::Application.routes.draw do
-  devise_for :users
+  devise_for :users, :controllers => { :omniauth_callbacks => "callbacks" }
   get "welcome/index"
   get "about", to: "welcome#about"
 

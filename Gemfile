@@ -64,31 +64,31 @@ group :doc do
   gem 'sdoc', require: false
 end
 
-# Use Devise for authentication
-gem 'devise'
-
 # Use AppSignal for errr monitoring.
 # gem 'appsignal'
 
-# Use Faker to help generate development data automatically
-gem 'faker'
-
-# Use Sidekiq to run background processes.
-gem 'sidekiq'
-
-gem 'omniauth-twitter'
+# Use Devise for authentication
+gem 'devise'
 
 # Use Devise-twitter to connect Devise to Twitter.
 # gem 'devise-twitter'
 
-# Use twitter to interface with Twitter API using Ruby.
-# gem 'twitter'
+# Use Faker to help generate development data automatically
+gem 'faker'
 
 # Use Figaro for handling credentials.
 gem 'figaro'
 
 # Use Letter Opener for previewing email in the browser instead of sending it.
 gem "letter_opener", :group => :development
+
+gem 'omniauth-twitter'
+
+# Use Sidekiq to run background processes.
+gem 'sidekiq'
+
+# Use twitter to interface with Twitter API using Ruby.
+# gem 'twitter'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'

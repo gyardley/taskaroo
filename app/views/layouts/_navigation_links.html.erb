@@ -10,7 +10,7 @@
   <a href="#contact">Contact</a>
 </li>
 
-<!-- This is my 'Sign in' link, which I'll want to move to another file. -->
+<!-- This is my 'Sign in' link, which I'll want to move to another file to organize this better. -->
 <li>
-  <a href="#">Sign in to Twitter</a>
+  <%= link_to "Sign in to Twitter", user_omniauth_authorize_path(:twitter) %>
 </li>
