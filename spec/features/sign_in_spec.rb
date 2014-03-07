@@ -15,5 +15,13 @@ describe "integration tests for sign in" do
     expect(page).to have_content "Signed in"
     expect(page).to have_no_content "Sign in to Twitter"
   end
+
+  it "should show 'Sign in to Twitter' when 'Sign out' link is clicked" do
+    visit root_path
+    click_link "Sign in to Twitter"
+    click_link "Sign out"
+    expect(page).to have_content "Sign in to Twitter"
+    expect(page).to have_no_content "Signed in"
+  end
   
 end

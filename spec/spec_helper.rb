@@ -41,3 +41,10 @@ RSpec.configure do |config|
   #     --seed 1234
   config.order = "random"
 end
+
+# This tells OmniAuth that I'm testing and it shouldn't make calls to actual places.
+OmniAuth.config.test_mode = true
+
+# The following is a mock of the response I get from Twitter.
+# Add additional items to this hash as I begin using them.
+OmniAuth.config.add_mock(:twitter, {uid: '12345', provider: 'twitter'})
