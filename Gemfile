@@ -3,14 +3,36 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.2'
 
-# Use PostgreSQL as the database for Active Record in production
-# Use sqlite3 as the database for Active Record in development
 group :production do
+
+  # Use PostgreSQL as the database for Active Record in production
   gem 'pg'
+
+  # This gem enables delpoyment to Heroku.
+  gem 'rails_12factor', '~> 0.0.2'
 end
 
 group :development do
+  
+  # Use rails_layout to generate Devise layouts files and flash messages.
+  gem 'rails_layout'
+
+  # Use sqlite3 as the database for Active Record in development.
   gem 'sqlite3'
+
+end
+
+group :test do
+
+  # Use Database Cleaner to ensure a clean state for testing.
+  gem 'database_cleaner'
+
+  gem 'capybara', "~> 2.2.1"
+end
+
+group :development, :test do
+  # Use RSpec for testing.
+  gem 'rspec-rails'
 end
 
 # Use SCSS for stylesheets
@@ -24,11 +46,6 @@ gem 'coffee-rails', '~> 4.0.0'
 
 # Use BootStrap for CSS framework
 gem 'bootstrap-sass'
-
-# Use rails_layout to generate Devise layouts files and flash messages.
-group :development do
-  gem 'rails_layout'
-end
 
 # See https://github.com/sstephenson/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
@@ -52,16 +69,6 @@ gem 'devise'
 
 # Use AppSignal for errr monitoring.
 # gem 'appsignal'
-
-# Use Cancan for user authorization.
-# gem 'cancan'
-
-# Use RSpec for testing.
-gem 'rspec'
-gem 'rspec-rails'
-
-# Use Database Cleaner to ensure a clean state for testing.
-gem 'database_cleaner'
 
 # Use Faker to help generate development data automatically
 gem 'faker'
