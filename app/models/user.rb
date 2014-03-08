@@ -4,13 +4,13 @@ class User < ActiveRecord::Base
   # devise :rememberable, :trackable
   devise :omniauthable
 
-  def self.retrieve_or_create(user_info)
-    existing_user = User.where(:provider => user_info.provider, :uid => user_info.uid).first
+  def self.retrieve_or_create(auth_hash)
+    existing_user = User.where(:provider => auth_hash.provider, :uid => auth_hash.uid).first
 
     if existing_user
       return existing_user
     else
-      existing_user = User.create(:provider => user_info.provider, :uid => user_info.uid)
+      existing_user = User.create(:provider => auth_hash.provider, :uid => auth_hash.uid)
     end 
   end
 

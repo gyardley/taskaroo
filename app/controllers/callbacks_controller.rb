@@ -3,12 +3,10 @@
 class CallbacksController < Devise::OmniauthCallbacksController
 
   def twitter
-    logger.info "Start of 'twitter' method."
-    # Get valid user.
-    auth_hash = request.env['omniauth.auth']
-    logger.info "After auth_hash."
-    @valid_user = User.retrieve_or_create(auth_hash)
-    logger.info "After valid_user"
+
+    # Retrieve existing or create a new user.
+    @valid_user = User.retrieve_or_create(request.env['omniauth.auth'])
+    
 
     if @valid_user # Check to see if this is a valid user.
       flash[:notice] = "You successfully signed in to Twtiter." # Show success message.
