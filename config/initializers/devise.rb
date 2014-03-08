@@ -228,7 +228,13 @@ Devise.setup do |config|
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', :scope => 'user,public_repo'
-  config.omniauth :twitter, ENV['TWITTER_CONSUMER_KEY'], ENV['TWITTER_CONSUMER_SECRET']
+  #
+  # The authorize_params: {force_login: 'true'} requires the user to sign in again,
+  # even when currently signed into Twitter.
+  # Additional options for logging in with Twitter can be found here:
+  # https://github.com/arunagw/omniauth-twitter
+  config.omniauth :twitter, ENV['TWITTER_CONSUMER_KEY'], ENV['TWITTER_CONSUMER_SECRET'], 
+    authorize_params: {force_login: 'true'}
 
   # ==> Warden configuration
   # If you want to use other strategies, that are not supported by Devise, or
