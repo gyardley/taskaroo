@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable
   # devise :rememberable, :trackable
   devise :omniauthable
+  has_many :lists
 
   def self.retrieve_or_create(auth_hash)
     existing_user = User.where(:provider => auth_hash.provider, :uid => auth_hash.uid).first
