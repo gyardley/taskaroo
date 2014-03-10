@@ -1,10 +1,6 @@
 require 'spec_helper'
 
 describe List do
-  
-  # validate that a list cannot be created without a name.
-    # try to create a list without a name
-    # assert that the list was not created
 
   describe "validation tests" do
     
