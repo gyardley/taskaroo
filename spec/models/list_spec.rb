@@ -26,5 +26,4 @@ describe List do
       @new_list.should_not be_valid
     end
   end
-  
 end

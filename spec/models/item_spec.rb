@@ -1,7 +1,6 @@
 require 'spec_helper'
 
 describe Item do
-  # pending "add some examples to (or delete) #{__FILE__}"
 
   describe "validation tests" do
 
@@ -32,16 +31,5 @@ describe Item do
       @new_item.completed.should be_false
       @new_item.completed.should_not be_nil
     end
-
   end
-
-  describe "#date_created_on" do
-
-    it "should show the date this item was created on in the format Month DD, YYYY" do
-
-    end
-
-    it ""
-  end
-
 end
