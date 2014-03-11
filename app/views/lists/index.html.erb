@@ -1,3 +1,23 @@
-<!-- index.html.erb -->
+<!-- app/views/index.html.erb -->
 
-placeholder
+<h1>All ToDo Lists</h1>
+
+<div class="row">
+  <div class="col-md-8">
+    <% @lists.each do |list| %>
+      <div class="media">
+        <div class="media-body">
+          <h4 class="media-heading">
+            <%= link_to list.name, list %>
+          </h4>
+          <small>
+            <%= list.name %>
+          </small>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class="col-md-4">
+    <%= link_to "New List", new_list_path, class: 'btn btn-primary btn-lg btn-block' %>
+  </div>
+</div>
