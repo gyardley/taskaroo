@@ -1,0 +1,11 @@
+# spec/fixtures/users.yml
+
+user_1:
+  provider: 'twitter'
+  uid: '12345'
+  nickname: 'eshizzle'
+
+user_2:
+  provider: 'twitter'
+  uid: '67890'
+  nickname: 'gbizzle'

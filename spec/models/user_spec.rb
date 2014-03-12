@@ -6,7 +6,7 @@ describe User do
   describe "validation tests" do
 
     before(:each) do
-      @new_user = User.new(uid: '12345', provider: 'twitter', nickname: 'eshizzle')
+      @new_user = users(:user_1)
     end
 
     it "is invalid if it doesn't have a uid" do
@@ -46,11 +46,9 @@ describe User do
 
     it "returns user corresponding to auth_hash if user *does* exist" do
 
-      new_user = User.create(uid: '12345', provider: 'twitter', nickname: 'eshizzle')
-
       existing_user = User.retrieve_or_create(@auth_hash)
       existing_user.should be_valid
-      existing_user.should eql new_user
+      existing_user.should eql users(:user_1)
     end
   end
 end

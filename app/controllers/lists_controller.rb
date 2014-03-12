@@ -14,7 +14,6 @@ class ListsController < ApplicationController
     else
       redirect_to(root_path, :alert => "You need to be signed in to view ToDo Lists.")
     end
-
   end
 
   def new
@@ -26,6 +25,14 @@ class ListsController < ApplicationController
   end
 
   def show
+    if current_user
+      @list = current_user.lists.find(params[:id])
+    else
+      redirect_to(root_path, :alert => "You need to be signed in to view ToDo Lists.")
+    end
+
+  rescue ActiveRecord::RecordNotFound
+    redirect_to(root_path, :alert => "List not found.")
 
   end
 

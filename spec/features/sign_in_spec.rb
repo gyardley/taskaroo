@@ -5,7 +5,7 @@ require 'spec_helper'
 describe "integration tests for sign in" do
 
   before(:each) do
-    @user = User.create(uid: '12345', provider: 'twitter', nickname: 'eshizzle')
+    @user = users(:user_1)
   end
 
   it "should show link to 'Sign in with Twitter' on the homepage" do

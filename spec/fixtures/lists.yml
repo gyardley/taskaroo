@@ -1,0 +1,10 @@
+# spec/fixtures/lists.yml
+
+list_1:
+  name: "gazebo"
+  user: user_1
+
+list_2:
+  name: "bodega"
+  user: user_2
+  

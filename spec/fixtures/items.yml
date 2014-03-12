@@ -1,0 +1,13 @@
+# spec/fixtures/items.yml
+
+item1_list1:
+  description: "Email Damon."
+  list: list_1
+
+item2_list1:
+  description: "Call Tammy."
+  list: list_1
+
+item3_list1:
+  description: "Write proposal for RailsGirls."
+  list: list_1
