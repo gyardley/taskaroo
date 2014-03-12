@@ -5,14 +5,18 @@ class User < ActiveRecord::Base
   devise :omniauthable
   has_many :lists
 
+  validates :provider, :uid, :nickname, presence: true
+
   def self.retrieve_or_create(auth_hash)
     existing_user = User.where(:provider => auth_hash.provider, :uid => auth_hash.uid).first
 
     if existing_user
       return existing_user
     else
-      existing_user = User.create(:provider => auth_hash.provider, :uid => auth_hash.uid)
+      logger.info "#{auth_hash}"
+      existing_user = User.create( :provider => auth_hash.provider,
+        :uid => auth_hash.uid,
+        :nickname => auth_hash.info.nickname )
     end 
   end
-
 end

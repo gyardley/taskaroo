@@ -4,7 +4,7 @@
 <% if user_signed_in? %>
   <li>
     <!-- esdy: Need to figure out how to make this text not highlight when focused on. -->
-    <a class="active">Signed in.</a>
+    <a class="active">Signed in as @<%= current_user.nickname %></a>
   </li>
   <li class="divider-vertical"></li>
   <li>

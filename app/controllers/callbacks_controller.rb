@@ -6,7 +6,6 @@ class CallbacksController < Devise::OmniauthCallbacksController
 
     # Retrieve existing or create a new user.
     @valid_user = User.retrieve_or_create(request.env['omniauth.auth'])
-    
 
     if @valid_user # Check to see if this is a valid user.
       flash[:notice] = "You successfully signed in with Twtiter." # Show success message.

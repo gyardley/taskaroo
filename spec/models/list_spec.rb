@@ -5,7 +5,8 @@ describe List do
   describe "validation tests" do
     
     before(:each) do
-      @new_list = List.new(name: "gazebo", user: User.new)
+      @new_user = User.new(uid: '12345', provider: 'twitter', nickname: 'eshizzle')
+      @new_list = List.new(name: "gazebo", user: @new_user)
     end
 
     it "is invalid if it doesn't have a name" do

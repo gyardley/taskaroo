@@ -17,7 +17,7 @@ describe ListsController do
 
       # API incompatibility between Devise and RSpec 2.14.1 doesn't let you use before(:all) here.
       before(:each) do
-        @user = User.create
+        @user = User.create(uid: '12345', provider: 'twitter', nickname: 'eshizzle')
         sign_in @user
       end
 
@@ -42,7 +42,8 @@ describe ListsController do
       end
 
       it "doesn't show lists for other users" do
-        new_list = List.create(name: "gazebo", user: User.create)
+        new_user = User.create(uid: '12345', provider: 'twitter', nickname: 'eshizzle')
+        new_list = List.create(name: "gazebo", user: new_user)
 
         get :index
         assigns["lists"].count.should eql 0
