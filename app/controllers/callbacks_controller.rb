@@ -9,10 +9,10 @@ class CallbacksController < Devise::OmniauthCallbacksController
     
 
     if @valid_user # Check to see if this is a valid user.
-      flash[:notice] = "You successfully signed in to Twtiter." # Show success message.
+      flash[:notice] = "You successfully signed in with Twtiter." # Show success message.
       sign_in_and_redirect @valid_user # Log the user in and redirect to success location.
     else
-      flash[:error] = "You were not able to sign in to Twitter." # Show failure message.
+      flash[:error] = "You were not able to sign in with Twitter." # Show failure message.
       redirect_to root_path
     end
 

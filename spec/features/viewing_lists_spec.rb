@@ -11,7 +11,7 @@ describe "integration tests for viewing lists" do
 
   it "should show the user's lists" do
     visit root_path
-    click_link "Sign in to Twitter"
+    click_link "Sign in with Twitter"
 
     page.should have_content(@list.name)
   end  
