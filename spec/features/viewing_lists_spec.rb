@@ -14,5 +14,11 @@ describe "integration tests for viewing lists" do
     click_link "Sign in with Twitter"
 
     page.should have_content(@list.name)
-  end  
+  end
+
+  it "should show the user's name" do
+    visit root_path
+    click_link "Sign in with Twitter"
+    page.should have_content(@user.name)
+  end
 end
