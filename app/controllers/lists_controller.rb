@@ -18,6 +18,11 @@ class ListsController < ApplicationController
 
   def new
 
+    if current_user
+      @list = List.new
+    else
+      redirect_to(root_path, :alert => "You need to be signed in to create ToDo Lists.")
+    end    
   end
 
   def create

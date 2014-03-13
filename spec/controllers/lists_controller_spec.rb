@@ -97,9 +97,45 @@ describe ListsController do
 
   describe "#new" do
 
-    it "returns a page" do
-      get :new
-      response.should be_success
+    context "while signed out" do
+
+      it "redirects to welcome page" do
+        get :new
+        response.should redirect_to root_path
+        flash[:alert].should eql "You need to be signed in to create ToDo Lists."
+      end
+    end
+
+    context "while signed in" do
+
+      before(:each) do
+        @user = users(:user_1)
+        sign_in @user
+      end
+
+      it "returns a page" do
+        get :new
+        response.should be_success
+      end
+
+      it "has a new list as a variable" do
+
+        get :new
+        assigns["list"].should_not be_valid
+        assigns["list"].should_not be_nil
+      end
+    end
+  end
+
+  describe "#create" do
+
+    context "while signed out" do
+
+      it "redirects to welcome page" do
+        post :create
+        response.should redirect_to root_path
+        flash[:alert].should eql "You need to sign in to create Lists."
+      end
     end
   end
 end
