@@ -137,5 +137,38 @@ describe ListsController do
         flash[:alert].should eql "You need to sign in to create Lists."
       end
     end
+
+    context "while signed in" do
+
+      before(:each) do
+        @user = users(:user_1)
+        sign_in @user
+      end
+
+      it "creates an object and redirects to the new list page if fed a valid list" do
+        
+        post :create, list: { name: "new gazebo" }
+        
+        list = List.find_by name: "new gazebo"
+        list.should_not be_nil
+        list.should be_valid
+        list.user.should eql @user
+        response.should redirect_to list_path(list)
+        flash[:notice].should eql "List saved."
+      end
+
+      it "renders the 'new' template and has errors if fed an invalid object" do
+        
+        count = List.count
+        post :create, list: { name: "" }
+
+        count.should eql List.count
+        assigns["list"].should_not be_nil
+        assigns["list"].errors.should_not be_nil
+        assigns["list"].errors["name"].first.should eql "can't be blank"
+        response.should render_template("lists/new")
+        flash[:error].should eql "There was an error saving the list. Please try again."
+      end
+    end
   end
 end

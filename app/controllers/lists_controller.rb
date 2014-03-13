@@ -27,6 +27,17 @@ class ListsController < ApplicationController
 
   def create
 
+    if current_user
+      @list = current_user.lists.build(new_list_params)
+      if @list.save
+        redirect_to(list_path(@list), :notice => "List saved.")
+      else
+        flash[:error] = "There was an error saving the list. Please try again."
+        render "new"
+      end
+    else
+      redirect_to(root_path, :alert => "You need to sign in to create Lists.")
+    end
   end
 
   def show
@@ -37,8 +48,8 @@ class ListsController < ApplicationController
     end
 
   rescue ActiveRecord::RecordNotFound
-    redirect_to(root_path, :alert => "List not found.")
 
+    redirect_to(root_path, :alert => "List not found.")
   end
 
   def edit
@@ -51,5 +62,12 @@ class ListsController < ApplicationController
 
   def destroy
 
+  end
+
+  private
+
+  def new_list_params
+    # Params has to have a 'list' param, or it should return an error.
+    params.require(:list).permit(:name)
   end
 end
