@@ -94,4 +94,12 @@ describe ListsController do
       end
     end
   end
+
+  describe "#new" do
+
+    it "returns a page" do
+      get :new
+      response.should be_success
+    end
+  end
 end
