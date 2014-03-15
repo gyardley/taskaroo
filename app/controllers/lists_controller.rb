@@ -67,7 +67,18 @@ class ListsController < ApplicationController
   end
 
   def update
+    @list = List.find(params[:id])
 
+    if current_user
+      if @list.update_attributes(new_list_params)
+        redirect_to(list_path(@list), :notice => "List saved.")
+      else
+        flash[:error] = "There was an error saving the list. Please try again."
+        render "edit"
+      end
+    else
+      redirect_to(root_path, :alert => "Sign in to edit Lists.")
+    end
   end
 
   def destroy

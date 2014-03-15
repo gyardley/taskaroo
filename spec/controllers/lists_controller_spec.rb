@@ -218,4 +218,59 @@ describe ListsController do
       end
     end
   end
+
+  describe "#update" do
+
+    before(:each) do
+      @user = users(:user_1)
+      @list = @user.lists.first
+    end
+
+    context "while signed out" do
+
+      it "redirects to welcome page" do
+        post :update, id: @list
+        response.should redirect_to root_path
+        flash[:alert].should eql "Sign in to edit Lists."
+      end
+    end
+
+    context "while signed in" do
+
+      before(:each) do
+        sign_in @user
+      end
+
+      it "updates the object and redirects to the list page if fed a valid list" do
+        
+        count = List.count
+
+        post :update, id: @list, list: { name: "updated gazebo" }
+        list = List.find @list.id
+
+        list.name.should eql "updated gazebo"
+        count.should eql List.count
+        list.should be_valid
+        list.user.should eql @user
+        response.should redirect_to list_path(list)
+        flash[:notice].should eql "List saved."
+      end
+
+      it "renders the 'edit' template and has errors if fed an invalid object" do
+        
+        count = List.count
+
+        post :update, id: @list, list: { name: "" }
+        list = List.find @list.id
+
+        list.name.should eql "gazebo"
+        count.should eql List.count
+        assigns["list"].should_not be_nil
+        assigns["list"].errors.should_not be_nil
+        assigns["list"].errors["name"].first.should eql "can't be blank"
+        response.should render_template("lists/edit")
+        flash[:error].should eql "There was an error saving the list. Please try again."
+      end
+    end
+  end
 end
