@@ -15,6 +15,7 @@ describe "integration tests for creating lists" do
 
   it "creates a list if input is valid" do
 
+    page.should have_content("New List")
     page.should have_content("List name")
     page.should have_button("Create")
     fill_in "List name", with: "gazebo"
@@ -31,6 +32,7 @@ describe "integration tests for creating lists" do
     
     page.should have_content("can't be blank")
     page.should_not have_content("List saved.")
+    page.should have_content("New List")
     page.should have_content("List name")
   end
 

@@ -22,5 +22,6 @@ describe "integration tests for viewing lists" do
     click_link "#{@list.name}"
 
     page.should have_content(@list.name)
+    page.should have_link("Edit")
   end
 end
