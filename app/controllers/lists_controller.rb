@@ -54,6 +54,7 @@ class ListsController < ApplicationController
 
   def edit
 
+    redirect_to(root_path, :alert => "Sign in to edit Lists.")
   end
 
   def update

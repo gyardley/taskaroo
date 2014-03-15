@@ -148,9 +148,8 @@ describe ListsController do
       it "creates an object and redirects to the new list page if fed a valid list" do
         
         post :create, list: { name: "new gazebo" }
-        
         list = List.find_by name: "new gazebo"
-        list.should_not be_nil
+
         list.should be_valid
         list.user.should eql @user
         response.should redirect_to list_path(list)
@@ -170,5 +169,24 @@ describe ListsController do
         flash[:error].should eql "There was an error saving the list. Please try again."
       end
     end
+  end
+
+  describe "#edit" do
+
+     before(:each) do
+      @user = users(:user_1)
+      @list = @user.lists.first
+    end
+
+   context "while signed out" do
+
+      it "redirects to welcome page" do
+
+        get :edit, id: @list
+        response.should redirect_to root_path
+        flash[:alert].should eql "Sign in to edit Lists."
+      end
+    end
+
   end
 end
