@@ -23,5 +23,6 @@ describe "integration tests for viewing lists" do
 
     page.should have_content(@list.name)
     page.should have_link("Edit")
+    page.should have_link("Delete")
   end
 end

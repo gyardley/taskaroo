@@ -22,21 +22,22 @@ describe "integration tests for creating lists" do
     find_field('List name').value.should eq @list.name
     page.should have_button("Update")
     fill_in "List name", with: "edited list name"
-    # click_button "Update"
+    click_button "Update"
     
-    # page.should have_content("edited list name")
-    # page.should have_content("List saved.")
-    # page.should_not have_content("List name")
+    page.should have_content("edited list name")
+    page.should have_content("List saved.")
+    page.should_not have_content("List name")
   end
 
-  # it "doesn't update the list if input is invalid" do
+  it "doesn't update the list if input is invalid" do
     
-  #   click_button "Create"
+    fill_in "List name", with: ""
+    click_button "Update"
     
-  #   page.should have_content("can't be blank")
-  #   page.should_not have_content("List saved.")
-  #   page.should have_content("New List")
-  #   page.should have_content("List name")
-  # end
+    page.should have_content("can't be blank")
+    page.should_not have_content("List saved.")
+    page.should have_content("Edit List")
+    page.should have_content("List name")
+  end
 
 end

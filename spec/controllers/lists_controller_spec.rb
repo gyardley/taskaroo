@@ -229,7 +229,7 @@ describe ListsController do
     context "while signed out" do
 
       it "redirects to welcome page" do
-        post :update, id: @list
+        put :update, id: @list
         response.should redirect_to root_path
         flash[:alert].should eql "Sign in to edit Lists."
       end
@@ -245,7 +245,7 @@ describe ListsController do
         
         count = List.count
 
-        post :update, id: @list, list: { name: "updated gazebo" }
+        put :update, id: @list, list: { name: "updated gazebo" }
         list = List.find @list.id
 
         list.name.should eql "updated gazebo"
@@ -260,7 +260,7 @@ describe ListsController do
         
         count = List.count
 
-        post :update, id: @list, list: { name: "" }
+        put :update, id: @list, list: { name: "" }
         list = List.find @list.id
 
         list.name.should eql "gazebo"
@@ -272,5 +272,68 @@ describe ListsController do
         flash[:error].should eql "There was an error saving the list. Please try again."
       end
     end
+  end
+
+  describe "#destroy" do
+
+    before(:each) do
+      @user = users(:user_1)
+      @list = @user.lists.first
+    end
+
+    context "while signed out" do
+
+      it "redirects to welcome page" do
+        delete :destroy, id: @list
+        response.should redirect_to root_path
+        flash[:alert].should eql "Sign in to delete Lists."
+      end
+    end
+
+    context "while signed in" do
+
+      before(:each) do
+        sign_in @user
+      end
+
+      it "deletes the object and redirects to the lists page if deleting a valid list" do
+        count = List.count
+        name = @list.name
+        delete :destroy, id: @list
+
+        list = List.find_by id: @list.id
+        
+        # expect{ List.find @list.id }.to raise_error(ActiveRecord::RecordNotFound)
+
+        list.should be_nil
+        (count - 1).should eql List.count
+        response.should redirect_to lists_path
+        flash[:notice].should eql "#{name} was deleted successfully."
+      end
+
+      it "redirects to the welcome page if attempting to delete a list that doesn't exist" do
+
+        count = List.count
+        
+        delete :destroy, id: 3004
+
+        count.should eql List.count
+        response.should redirect_to lists_path
+        flash[:error].should eql "There was an error deleting the list."
+      end
+
+      it "redirects to the welcome page if I attempt to delete a list that's not mine" do
+        list2 = lists(:list_2)
+        count = List.count
+
+        delete :destroy, id: list2.id
+
+        count.should eql List.count
+        response.should redirect_to lists_path
+        flash[:error].should eql "There was an error deleting the list."
+      end
+
+    end
+
   end
 end

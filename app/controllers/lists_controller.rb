@@ -26,9 +26,9 @@ class ListsController < ApplicationController
   end
 
   def create
-
+    logger.info "In create method"
     if current_user
-      @list = current_user.lists.build(new_list_params)
+      @list = current_user.lists.build(editable_list_params)
       if @list.save
         redirect_to(list_path(@list), :notice => "List saved.")
       else
@@ -67,10 +67,11 @@ class ListsController < ApplicationController
   end
 
   def update
+    logger.info "In update method"
     @list = List.find(params[:id])
 
     if current_user
-      if @list.update_attributes(new_list_params)
+      if @list.update_attributes(editable_list_params)
         redirect_to(list_path(@list), :notice => "List saved.")
       else
         flash[:error] = "There was an error saving the list. Please try again."
@@ -82,12 +83,31 @@ class ListsController < ApplicationController
   end
 
   def destroy
+    
+    if current_user
+      # @list = List.find(params[:id])
+      @list = current_user.lists.find(params[:id])
+      name = @list.name
+      if @list.destroy
+        flash[:notice] = "#{name} was deleted successfully."
+        redirect_to lists_path
+      else
+        flash[:error] = "There was an error deleting the list."
+        redirect_to lists_path
+      end
+    else
+      redirect_to(root_path, :alert => "Sign in to delete Lists.")
+    end
 
+  rescue ActiveRecord::RecordNotFound
+
+    flash[:error] = "There was an error deleting the list."
+    redirect_to lists_path
   end
 
   private
 
-  def new_list_params
+  def editable_list_params
     # Params has to have a 'list' param, or it should return an error.
     params.require(:list).permit(:name)
   end
