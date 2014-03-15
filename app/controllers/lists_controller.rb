@@ -54,7 +54,16 @@ class ListsController < ApplicationController
 
   def edit
 
-    redirect_to(root_path, :alert => "Sign in to edit Lists.")
+    if current_user
+      @list = current_user.lists.find(params[:id])
+      # @list = List.find(params[:id])    # esdy: Why doesn't this work?
+    else
+      redirect_to(root_path, :alert => "Sign in to edit Lists.")
+    end
+
+  rescue ActiveRecord::RecordNotFound
+
+    redirect_to(root_path, :alert => "List not found.") 
   end
 
   def update

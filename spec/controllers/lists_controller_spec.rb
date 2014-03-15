@@ -173,12 +173,12 @@ describe ListsController do
 
   describe "#edit" do
 
-     before(:each) do
+    before(:each) do
       @user = users(:user_1)
       @list = @user.lists.first
     end
 
-   context "while signed out" do
+    context "while signed out" do
 
       it "redirects to welcome page" do
 
@@ -188,5 +188,34 @@ describe ListsController do
       end
     end
 
+    context "while signed in" do
+
+      before(:each) do
+        sign_in @user
+      end
+
+      it "returns a page" do
+
+        get :edit, id: @list
+        response.should be_success
+      end
+
+      it "has the right list as a variable" do
+
+        get :edit, id: @list
+        assigns["list"].should eql @list
+      end
+
+      it "redirects to welcome page if I request a list that's not mine" do
+
+        user2 = users(:user_2)
+        list2 = user2.lists.first
+
+        get :edit, id: list2
+
+        response.should redirect_to root_path
+        flash[:alert].should eql "List not found."
+      end
+    end
   end
 end
