@@ -20,4 +20,17 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  auth_alerts:
+    lists:
+      index: "You need to be signed in to view ToDo Lists."
+      new: "You need to be signed in to create ToDo Lists."
+      create: "You need to sign in to create Lists."
+      show: "You need to be signed in to view ToDo Lists."
+      edit: "Sign in to edit Lists."
+      update: "Sign in to edit Lists."
+      destroy: "Sign in to delete Lists."
+  404_errors:
+    lists:
+      show: "List not found."
+      edit: "List not found."
+      destroy: "There was an error deleting the list."

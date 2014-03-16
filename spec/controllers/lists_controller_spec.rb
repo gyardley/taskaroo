@@ -84,14 +84,14 @@ describe ListsController do
         assigns["list"].should eql @list
       end
 
-      it "redirects to welcome page if I request a list that's not mine" do
+      it "redirects to lists page if I request a list that's not mine" do
         user2 = users(:user_2)
         list2 = user2.lists.first
 
         get :show, id: list2
 
-        response.should redirect_to root_path
-        flash[:alert].should eql "List not found."
+        response.should redirect_to lists_path
+        flash[:error].should eql "List not found."
       end
     end
   end
@@ -207,15 +207,15 @@ describe ListsController do
         assigns["list"].should eql @list
       end
 
-      it "redirects to welcome page if I request a list that's not mine" do
+      it "redirects to lists page if I request a list that's not mine" do
 
         user2 = users(:user_2)
         list2 = user2.lists.first
 
         get :edit, id: list2
 
-        response.should redirect_to root_path
-        flash[:alert].should eql "List not found."
+        response.should redirect_to lists_path
+        flash[:error].should eql "List not found."
       end
     end
   end
