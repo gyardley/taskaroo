@@ -1,6 +1,6 @@
 class List < ActiveRecord::Base
   belongs_to :user
-  has_many :items
+  has_many :tasks
 
   validates :name, presence: true
   validates :user, presence: true

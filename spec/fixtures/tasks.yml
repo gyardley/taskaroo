@@ -1,13 +1,13 @@
-# spec/fixtures/items.yml
+# spec/fixtures/tasks.yml
 
-item1_list1:
+task1_list1:
   description: "Email Damon."
   list: list_1
 
-item2_list1:
+task2_list1:
   description: "Call Tammy."
   list: list_1
 
-item3_list1:
+task3_list1:
   description: "Write proposal for RailsGirls."
   list: list_1

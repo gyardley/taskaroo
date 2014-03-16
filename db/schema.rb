@@ -13,16 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20140312170127) do
 
-  create_table "items", force: true do |t|
-    t.string   "description"
-    t.boolean  "completed",   default: false
-    t.integer  "list_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "items", ["list_id"], name: "index_items_on_list_id"
-
   create_table "lists", force: true do |t|
     t.string   "name"
     t.integer  "user_id"
@@ -31,6 +21,16 @@ ActiveRecord::Schema.define(version: 20140312170127) do
   end
 
   add_index "lists", ["user_id"], name: "index_lists_on_user_id"
+
+  create_table "tasks", force: true do |t|
+    t.string   "description"
+    t.boolean  "completed",   default: false
+    t.integer  "list_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "tasks", ["list_id"], name: "index_tasks_on_list_id"
 
   create_table "users", force: true do |t|
     t.datetime "created_at"
