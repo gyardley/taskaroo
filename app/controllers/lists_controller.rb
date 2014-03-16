@@ -6,95 +6,57 @@ class ListsController < ApplicationController
   before_filter :authenticate_user
 
   def index
-    #if current_user
-      # @lists = List.where(user_id: current_user.id)
-      @lists = current_user.lists
-    #else
-    #  redirect_to(root_path, :alert => "You need to be signed in to view ToDo Lists.")
-    #end
+    @lists = current_user.lists
   end
 
   def new
-
-    #if current_user
-      @list = List.new
-    # else
-    #   redirect_to(root_path, :alert => "You need to be signed in to create ToDo Lists.")
-    # end    
+    @list = List.new 
   end
 
   def create
-    # if current_user
-      @list = current_user.lists.build(editable_list_params)
-      if @list.save
-        redirect_to(list_path(@list), :notice => "List saved.")
-      else
-        flash[:error] = "There was an error saving the list. Please try again."
-        render "new"
-      end
-    # else
-    #   redirect_to(root_path, :alert => "You need to sign in to create Lists.")
-    # end
+    @list = current_user.lists.build(editable_list_params)
+    if @list.save
+      redirect_to(list_path(@list), :notice => "List saved.")
+    else
+      flash[:error] = "There was an error saving the list. Please try again."
+      render "new"
+    end
   end
 
   def show
-    # if current_user
-      @list = current_user.lists.find(params[:id])
-    # else
-    #   redirect_to(root_path, :alert => "You need to be signed in to view ToDo Lists.")
-    # end
-
+    @list = current_user.lists.find(params[:id])
   rescue ActiveRecord::RecordNotFound
-
     redirect_to(root_path, :alert => "List not found.")
   end
 
   def edit
-
-    # if current_user
-      @list = current_user.lists.find(params[:id])
-      # @list = List.find(params[:id])    # esdy: Why doesn't this work?
-    # else
-    #   redirect_to(root_path, :alert => "Sign in to edit Lists.")
-    # end
-
+    @list = current_user.lists.find(params[:id])
   rescue ActiveRecord::RecordNotFound
-
     redirect_to(root_path, :alert => "List not found.") 
   end
 
   def update
-    logger.info "In update method"
     @list = List.find(params[:id])
 
-    # if current_user
-      if @list.update_attributes(editable_list_params)
-        redirect_to(list_path(@list), :notice => "List saved.")
-      else
-        flash[:error] = "There was an error saving the list. Please try again."
-        render "edit"
-      end
-    # else
-    #   redirect_to(root_path, :alert => "Sign in to edit Lists.")
-    # end
+    if @list.update_attributes(editable_list_params)
+      redirect_to(list_path(@list), :notice => "List saved.")
+    else
+      flash[:error] = "There was an error saving the list. Please try again."
+      render "edit"
+    end
   end
 
   def destroy
-    
-    # if current_user
-      # @list = List.find(params[:id])
-      @list = current_user.lists.find(params[:id])
-      name = @list.name
-      if @list.destroy
-        flash[:notice] = "#{name} was deleted successfully."
-        redirect_to lists_path
-      else
-        flash[:error] = "There was an error deleting the list."
-        redirect_to lists_path
-      end
-    # else
-    #   redirect_to(root_path, :alert => "Sign in to delete Lists.")
-    # end
+    @list = current_user.lists.find(params[:id])
+    name = @list.name
+
+    if @list.destroy
+      flash[:notice] = "#{name} was deleted successfully."
+      redirect_to lists_path
+    else
+      flash[:error] = "There was an error deleting the list."
+      redirect_to lists_path
+    end
 
   rescue ActiveRecord::RecordNotFound
 
@@ -110,9 +72,8 @@ class ListsController < ApplicationController
   end
 
   def authenticate_user
-
     unless current_user
-      alert_message = case request.path_parameters[:action]
+      alert_message = case request.symbolized_path_parameters[:action]
       when "index"
         "You need to be signed in to view ToDo Lists."
       when "new"
