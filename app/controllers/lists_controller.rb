@@ -22,11 +22,9 @@ class ListsController < ApplicationController
   end
 
   def show
-    @list = current_user.lists.find(params[:id])
   end
 
   def edit
-    @list = current_user.lists.find(params[:id])
   end
 
   def update
@@ -41,24 +39,22 @@ class ListsController < ApplicationController
   end
 
   def destroy
-    @list = current_user.lists.find(params[:id])
-
     if @list.destroy
       flash[:notice] = "#{@list.name} was deleted successfully."
-      redirect_to lists_path
     else
       flash[:error] = "There was an error deleting the list."
-      redirect_to lists_path
     end
+    redirect_to lists_path
   end
 
   private
 
   def get_list
-      @list = current_user.lists.find(params[:id])
+    @list = current_user.lists.find(params[:id])
   end
 
   def editable_list_params
+
     # Params has to have a 'list' param, or it should return an error.
     params.require(:list).permit(:name)
   end
