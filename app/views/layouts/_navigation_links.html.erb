@@ -1,11 +1,14 @@
 <%# add navigation links to this file %>
 
 <li>
-  <%= link_to "About", about_path %></li>
+  <a href="#new-task"><span class="glyphicon glyphicon-plus"></span></a>
 </li>
 <li>
-  <a href="#services">Services</a>
+  <a href="#view-tasks">Tasks</a>
 </li>
 <li>
-  <a href="#contact">Contact</a>
+  <%= link_to "Lists", lists_path %>
+</li>
+<li>
+  <%= link_to "About", about_path %>
 </li>

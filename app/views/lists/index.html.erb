@@ -1,9 +1,14 @@
 <!-- app/views/index.html.erb -->
 
-<h1>All ToDo Lists</h1>
+<div class="row">
+  <div class="col-ts-12 col-xs-12 col-sm-8 col-md-8 col-lg-8">
+    <h2>All ToDo Lists <small>
+      <%= link_to "New List", new_list_path, type: "button", class: "btn btn-link" %></small></h2>
+  </div>
+</div>
 
 <div class="row">
-  <div class="col-xs-4">
+  <div class="col-ts-12 col-xs-12 col-sm-8 col-md-8 col-lg-8">
     <ul class="list-group">
       <% @lists.each do |list| %>
         <li class="list-group-item">
@@ -12,10 +17,5 @@
       <% end %>
     </ul>
   </div>
-  <div class="col-xs-2">
-    <%= link_to "New List", new_list_path, class: 'btn btn-primary btn-lg btn-block' %>
-  </div>
 </div>
-
-
 
