@@ -9,7 +9,6 @@ describe ListsController do
       it "redirects to welcome page" do
         get :index
         response.should redirect_to root_path
-        # Rails.logger.info "Here is the message: #{flash.inspect}"
         flash[:alert].should eql "You need to be signed in to view ToDo Lists."
       end
     end
@@ -27,7 +26,7 @@ describe ListsController do
         response.should be_success
       end
 
-      it "contains at least one of the user's list" do
+      it "contains at least one of the user's lists" do
         new_list = @user.lists.first
 
         get :index
@@ -41,6 +40,7 @@ describe ListsController do
         assigns["lists"].count.should eql 2
       end
 
+      # esdy: I think I can get rid of this test.
       it "doesn't show lists for other users" do
         new_user = User.create(uid: '2468', provider: 'twitter', nickname: 'plizzle')
         sign_in new_user

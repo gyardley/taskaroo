@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   # devise :rememberable, :trackable
   devise :omniauthable
   has_many :lists
+  has_many :tasks, through: :lists
 
   validates :provider, :uid, :nickname, presence: true
 
