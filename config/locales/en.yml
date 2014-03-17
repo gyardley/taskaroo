@@ -29,6 +29,14 @@ en:
       edit: "Sign in to edit Lists."
       update: "Sign in to edit Lists."
       destroy: "Sign in to delete Lists."
+    tasks:
+      index: "You need to be signed in to view Tasks."
+      new: "You need to be signed in to create Tasks."
+      create: "You need to sign in to create Tasks."
+      show: "You need to be signed in to view Tasks."
+      edit: "Sign in to edit Tasks."
+      update: "Sign in to edit Tasks."
+      destroy: "Sign in to delete Tasks."
   404_errors:
     lists:
       show: "List not found."

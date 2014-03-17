@@ -9,7 +9,7 @@ describe ListsController do
       it "redirects to welcome page" do
         get :index
         response.should redirect_to root_path
-        Rails.logger.info "Here is the message: #{flash.inspect}"
+        # Rails.logger.info "Here is the message: #{flash.inspect}"
         flash[:alert].should eql "You need to be signed in to view ToDo Lists."
       end
     end
