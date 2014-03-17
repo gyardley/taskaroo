@@ -71,6 +71,7 @@ describe ListsController do
 
       before(:each) do
         sign_in @user
+        @tasks = @list.tasks
       end
 
       it "returns a page" do
@@ -78,10 +79,11 @@ describe ListsController do
         response.should be_success
       end
 
-      it "has the right list as a variable" do
+      it "has the right list and tasks as a variables" do
 
         get :show, id: @list
         assigns["list"].should eql @list
+        assigns["tasks"].should =~ @tasks
       end
 
       it "redirects to lists page if I request a list that's not mine" do

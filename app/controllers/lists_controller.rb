@@ -22,6 +22,7 @@ class ListsController < ApplicationController
   end
 
   def show
+    @tasks = @list.tasks
   end
 
   def edit
