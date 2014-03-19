@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe "integration tests for viewing lists" do
+describe "integration tests for viewing tasks" do
 
   before(:each) do
     @user = users(:user_1)

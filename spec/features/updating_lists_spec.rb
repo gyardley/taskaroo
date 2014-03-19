@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe "integration tests for creating lists" do
+describe "integration tests for updating lists" do
 
   before(:each) do
 

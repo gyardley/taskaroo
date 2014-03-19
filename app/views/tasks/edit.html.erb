@@ -1,3 +1,5 @@
 <!-- app/views/tasks/edit.html.erb -->
 
-Pending.
+<h1>Edit Task</h1>
+
+<%= render partial: 'form', locals: { task: @task, lists: @lists, button_text: "Update" } %>

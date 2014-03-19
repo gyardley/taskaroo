@@ -1,7 +1,7 @@
 class TasksController < ApplicationController
 
   before_filter :authenticate_user
-  before_filter :get_task, only: [:edit]
+  before_filter :get_task, only: [:edit, :destroy]
   # before_filter :get_task, only: [:show, :edit, :destroy]
 
   def index
@@ -25,6 +25,7 @@ class TasksController < ApplicationController
   end
 
   def edit
+    @lists = current_user.lists
   end
 
   def update
@@ -34,8 +35,18 @@ class TasksController < ApplicationController
       redirect_to(tasks_path, :notice => "Task saved.")
     else
       flash[:error] = "There was an error saving the task. Please try again."
+      @lists = current_user.lists
       render "edit"
     end
+  end
+
+  def destroy
+    if @task.destroy
+      flash[:notice] = "#{@task.description} was deleted successfully."
+    # else
+    #   flash[:error] = "There was an error deleting the list."
+    end
+    redirect_to tasks_path
   end
 
   private
