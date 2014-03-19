@@ -125,6 +125,108 @@ describe TasksController do
 
   describe "#edit" do
 
+    before(:each) do
+      @user = users(:user_1)
+      @list = @user.lists.first
+      @task = @list.tasks.first
+    end
+
+    context "while signed out" do
+
+      it "redirects to welcome page" do
+
+        get :edit, id: @task
+        response.should redirect_to root_path
+        flash[:alert].should eql "Sign in to edit Tasks."
+      end
+    end
+
+    context "while signed in" do
+
+      before(:each) do
+        sign_in @user
+      end
+
+      it "returns a page" do
+
+        get :edit, id: @task
+        response.should be_success
+      end
+
+      it "has the right task as a variable" do
+
+        get :edit, id: @task
+        assigns["task"].should eql @task
+      end
+
+      it "redirects to Tasks index page if I request a task that's not mine" do
+
+        user2 = users(:user_2)
+        list2 = user2.lists.first
+        task2 = Task.create( description: "Go to the store", list: list2 )
+
+        get :edit, id: task2
+
+        response.should redirect_to tasks_path
+        flash[:error].should eql "Task not found."
+      end
+    end
+  end
+
+  describe "#update" do
+
+    before(:each) do
+      @user = users(:user_1)
+      @list = lists(:list_1)
+      @task = tasks(:task1_list1)
+    end
+
+    context "while signed out" do
+
+      it "redirects to welcome page" do
+        put :update, id: @task
+        response.should redirect_to root_path
+        flash[:alert].should eql "Sign in to edit Tasks."
+      end
+    end
+
+    context "while signed in" do
+
+      before(:each) do
+        sign_in @user
+      end
+
+      it "updates the object and redirects to the Tasks index page if fed a valid task" do
+        
+        count = Task.count
+
+        put :update, id: @task, task: { description: "Buy tickets to Chiloe." }
+        task = Task.find @task.id
+
+        task.description.should eql "Buy tickets to Chiloe."
+        count.should eql Task.count
+        task.should be_valid
+        task.list.user.should eql @user
+        response.should redirect_to tasks_path
+        flash[:notice].should eql "Task saved."
+      end
+
+      it "renders the 'edit' template and has errors if fed an invalid object" do
+        
+        count = Task.count
+
+        put :update, id: @task, task: { description: "" }
+        task = Task.find @task.id
+
+        task.description.should eql "Email Damon."
+        count.should eql Task.count
+        assigns["task"].should_not be_nil
+        assigns["task"].errors.should_not be_nil
+        assigns["task"].errors["description"].first.should eql "can't be blank"
+        response.should render_template("tasks/edit")
+        flash[:error].should eql "There was an error saving the task. Please try again."
+      end
+    end
   end
 
 end

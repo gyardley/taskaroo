@@ -20,6 +20,10 @@ class ApplicationController < ActionController::Base
 
   def render_404
     flash[:error] = t("404_errors.#{request.symbolized_path_parameters[:controller]}.#{request.symbolized_path_parameters[:action]}")
-    redirect_to lists_path
+    if request.symbolized_path_parameters[:controller] == "lists"
+      redirect_to lists_path
+    else
+      redirect_to tasks_path
+    end
   end
 end

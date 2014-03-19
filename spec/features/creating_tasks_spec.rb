@@ -34,16 +34,13 @@ describe "integration tests for creating Tasks" do
     page.should have_link("New Task", { href: new_task_path } )
   end
 
-  it "creates a Task and returns to the List page if accessed from List page and input is valid" do
-    visit lists_path
-    click_link "#{@list.name}"
-    click_link "New Task"
+  it "creates a Task and returns to the Tasks index page if input is valid" do
+    visit new_task_path
 
     page.should have_content("New Task")
-    # page.should have_content("Task description")
-    # find_field('What are you going to do?').value.should eq 'Task description'
-    page.should have_field("What are you going to do?")
-    # page.should have_select("#{@list.name}")        # List should be pre-selected
+    page.should have_content("What are you going to do?")
+    page.should have_field("Task description")
+    page.should have_content("Put it on a list")
     page.should have_button("Create")
 
     fill_in "Task description", with: "Here is a new task"
@@ -51,31 +48,30 @@ describe "integration tests for creating Tasks" do
 
     page.should have_content("Here is a new task")
     page.should have_content("Task saved.")
-    page.should have_content("#{@list.name}")
-    page.should_not have_content("Task description")
+    page.should have_content("All Tasks")
+    page.should_not have_content("What are you going to do?")
   end
 
-  # it "creates a list if input is valid" do
+  # esdy: I should come back and implement this task if I want this feature.
+  # it "loads form with current List pre-selected if accessed from List page" do
+    # visit lists_path
+    # click_link "#{@list.name}"
+    # click_link "New Task"
 
-  #   page.should have_content("New List")
-  #   page.should have_content("List name")
-  #   page.should have_button("Create")
-  #   fill_in "List name", with: "gazebo"
-  #   click_button "Create"
-    
-  #   page.should have_content("gazebo")
-  #   page.should have_content("List saved.")
-  #   page.should_not have_content("List name")
+    # page.should have_select("#{@list.name}")    # List should be pre-selected
+
+    # click_button "Create"
+    # page.should have_content("#{@list.name}")
   # end
 
-  # it "doesn't create a list if input is invalid" do
+  it "doesn't create a task if input is invalid" do
+    visit new_task_path
+    click_button "Create"
     
-  #   click_button "Create"
-    
-  #   page.should have_content("can't be blank")
-  #   page.should_not have_content("List saved.")
-  #   page.should have_content("New List")
-  #   page.should have_content("List name")
-  # end
+    page.should have_content("can't be blank")
+    page.should_not have_content("Task saved.")
+    page.should have_content("New Task")
+    page.should have_field("Task description")
+  end
 
 end

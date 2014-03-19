@@ -42,3 +42,6 @@ en:
       show: "List not found."
       edit: "List not found."
       destroy: "There was an error deleting the list."
+    tasks:
+      edit: "Task not found."
+      destroy: "There was an error deleting the task."
