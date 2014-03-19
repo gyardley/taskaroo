@@ -1,3 +1,33 @@
 <!-- app/views/tasks/index.html.erb -->
 
-pending
+<div class="row">
+  <div class="col-ts-12 col-xs-12 col-sm-8 col-md-8 col-lg-8">
+    <h2>All Tasks <small>
+      <%= link_to "New Task", new_task_path, type: "button", class: "btn btn-link" %></small></h2>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-ts-12 col-xs-12 col-sm-8 col-md-8 col-lg-8">
+    <table class="table table-hover">
+      <thead>
+        <tr>
+          <th>Done?</th>
+          <th>Task</th>
+          <th>List</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @tasks.each do |task| %>
+          <tr id="row-<%= task.id %>">
+            <td><input type="checkbox"></td>
+            <td><%= task.description %></td>
+            <td><%= task.list.name %></td>
+            <td><%= link_to "Edit", edit_task_path(task) %></td>
+            <td><%= link_to "Delete", [task], :method => :delete %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

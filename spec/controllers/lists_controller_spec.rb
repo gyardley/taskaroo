@@ -148,7 +148,7 @@ describe ListsController do
         sign_in @user
       end
 
-      it "creates an object and redirects to the new list page if fed a valid list" do
+      it "creates an object and redirects to the newly created list page if fed a valid list" do
         
         post :create, list: { name: "new gazebo" }
         list = List.find_by name: "new gazebo"

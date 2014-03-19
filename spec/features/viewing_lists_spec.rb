@@ -10,6 +10,13 @@ describe "integration tests for viewing lists" do
     @tasks = @list.tasks
   end
 
+  it "should show link to see all lists on the homepage" do
+    visit root_path
+    click_link "Sign in with Twitter"
+    
+    expect(page).to have_link "Lists"
+  end
+
   it "shows the user's lists" do
     visit root_path
     click_link "Sign in with Twitter"

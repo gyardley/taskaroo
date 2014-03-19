@@ -1,7 +1,8 @@
 <!-- show.html.erb -->
 
 <h2>
-  <%= @list.name %>
+  <%= @list.name %> <small>
+      <%= link_to "New Task", new_task_path, type: "button", class: "btn btn-link" %></small>
 </h2>
 
 <div class="row">
