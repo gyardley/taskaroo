@@ -1,4 +1,4 @@
-Blocitoff::Application.routes.draw do
+Taskaroo::Application.routes.draw do
   devise_for :users, :controllers => { :omniauth_callbacks => "callbacks" }
 
   get "welcome/index"

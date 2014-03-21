@@ -3,4 +3,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-Blocitoff::Application.load_tasks
+Taskaroo::Application.load_tasks
