@@ -15,3 +15,17 @@
 //= require turbolinks
 //= require bootstrap
 //= require_tree .
+
+// esdy: I would like for this image to fade in/out, but can't figure that out right now.
+
+$(document).ready(function() {
+  $( ".full-width-image-1" ).mouseover(function(){
+    $("#roo-pointer").attr("src", "<%= image_path("organize-roo-63-100.png") %>");
+  });
+
+  $( ".full-width-image-1" ).mouseout(function(){
+      $("#roo-pointer").attr("src", "<%= image_path("organize-63-100.png") %>");
+  });
+});
+
+

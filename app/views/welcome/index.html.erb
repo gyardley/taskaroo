@@ -1,3 +1,43 @@
 <!-- app/views/welcome/index.html.erb -->
 
-<%= render 'layouts/task_list' %>
+<body>
+
+  <div class="jumbotron">
+    <div class="full-width-image-1" id="masthead">
+      <%= image_tag("organize-63-100.png", :alt => "Organize your life.", :id => "roo-pointer", :class => "img-responsive") %>
+      <p>Let Taskaroo help keep track of your to-do lists.</p>
+      <p>
+        <%= link_to image_tag("sign-in-with-twitter-gray.png", :alt => "Sign in with Twitter", :class => "img-responsive", :type => "button"), user_omniauth_authorize_path(:twitter) %>
+      </p>
+    </div>
+  </div>
+  <!-- /full-width-image-1 -->
+
+  <div class="container">
+      <div class="row">
+          <div class="col-lg-12 section">
+              <h1 class="section-heading">Taskeroo is a simple task-tracking application.</h1>
+              <p class="lead section-lead">It's easy to create tasks and mark them as "done." You can also organize tasks into lists. Each time you complete a task list, you win a prize!</p>
+              <p class="lead section-lead">Just kidding about that last part, but it's fun to keep track of the things you're doing each day. Marking items as complete lets you know you've fnished something and can move on to the next task.</p>
+              <p class="section-paragraph">Taskaroo links up to your Twitter account, so you can easily create new tasks by tweeting @Taskaroo -- or @tkroo, for short!</p>
+          </div>
+      </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="container">
+      <footer>
+          <div class="row">
+              <div class="col-lg-12">
+                  Copyright &copy; Taskeroo 2014
+              </div>
+          </div>
+      </footer>
+  </div>
+
+  </div>
+  <!-- /container -->
+
+</body>
+
+</html>
