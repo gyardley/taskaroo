@@ -10,7 +10,7 @@ describe "integration tests for creating Tasks" do
     @list = @user.lists.first
 
     visit root_path
-    click_link "Sign in with Twitter"
+    sign_in_with_twitter
   end
 
   # esdy: I want to add tests, and functionality, so that

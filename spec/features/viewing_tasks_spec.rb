@@ -10,7 +10,7 @@ describe "integration tests for viewing tasks" do
     @tasks = @list.tasks
 
     visit root_path
-    click_link "Sign in with Twitter"
+    sign_in_with_twitter
   end
 
   it "should show link to see all tasks on the homepage" do

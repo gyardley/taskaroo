@@ -10,7 +10,7 @@ describe "integration tests for updating lists" do
     @list = @user.lists.first
 
     visit root_path
-    click_link "Sign in with Twitter"
+    sign_in_with_twitter
     click_link "#{@list.name}"
     click_link "Edit"
   end

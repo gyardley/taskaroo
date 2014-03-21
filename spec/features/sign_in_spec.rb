@@ -15,14 +15,14 @@ describe "integration tests for sign in" do
 
   it "should show 'Signed in as @nickname' when 'Sign in with Twitter' link is clicked" do
     visit root_path
-    click_link "Sign in with Twitter"
+    sign_in_with_twitter
     expect(page).to have_content "Signed in as @#{@user.nickname}"
     expect(page).to have_no_content "Sign in with Twitter"
   end
 
   it "should show 'Sign in with Twitter' when 'Sign out' link is clicked" do
     visit root_path
-    click_link "Sign in with Twitter"
+    sign_in_with_twitter
     click_link "Sign out"
     expect(page).to have_content "Sign in with Twitter"
     expect(page).to have_no_content "Signed in"

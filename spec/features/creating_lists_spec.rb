@@ -9,7 +9,7 @@ describe "integration tests for creating lists" do
     @user = users(:user_1)
 
     visit root_path
-    click_link "Sign in with Twitter"
+    sign_in_with_twitter
     visit new_list_path
   end
 

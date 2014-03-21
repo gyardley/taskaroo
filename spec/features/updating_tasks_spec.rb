@@ -13,7 +13,7 @@ describe "integration tests for updating tasks" do
     @tasks = @list.tasks
 
     visit root_path
-    click_link "Sign in with Twitter"
+    sign_in_with_twitter
     visit tasks_path
 
     find("tr#row-#{@tasks.first.id}").click_link("Edit", { href: "/tasks/#{@tasks.first.id}/edit" })

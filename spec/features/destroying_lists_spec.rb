@@ -8,7 +8,7 @@ describe "integration tests for destroying lists" do
     @user = users(:user_1)
     @list = @user.lists.first
     visit root_path
-    click_link "Sign in with Twitter"
+    sign_in_with_twitter
   end
 
   it "destroys a list if input is valid" do

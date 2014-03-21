@@ -12,21 +12,21 @@ describe "integration tests for viewing lists" do
 
   it "should show link to see all lists on the homepage" do
     visit root_path
-    click_link "Sign in with Twitter"
+    sign_in_with_twitter
     
     expect(page).to have_link "Lists"
   end
 
   it "shows the user's lists" do
     visit root_path
-    click_link "Sign in with Twitter"
+    sign_in_with_twitter
 
     page.should have_content(@list.name)
   end
 
   it "shows the individual List page and its tasks when the user clicks the name of that List" do
     visit root_path
-    click_link "Sign in with Twitter"
+    sign_in_with_twitter
     click_link "#{@list.name}"
 
     page.should have_content(@list.name)

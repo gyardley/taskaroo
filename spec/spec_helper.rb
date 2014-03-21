@@ -49,3 +49,7 @@ OmniAuth.config.test_mode = true
 # The following is a mock of the response I get from Twitter.
 # Add additional items to this hash as I begin using them.
 OmniAuth.config.add_mock(:twitter, {uid: '12345', provider: 'twitter', nickname: 'eshizzle'})
+
+def sign_in_with_twitter
+  find(".pull-right li").click_link "Sign in with Twitter"
+end

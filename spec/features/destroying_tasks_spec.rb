@@ -9,7 +9,7 @@ describe "integration tests for destroying tasks" do
     @list = @user.lists.first
     @task = @list.tasks.first
     visit root_path
-    click_link "Sign in with Twitter"
+    sign_in_with_twitter
   end
 
   it "destroys a task if input is valid" do
