@@ -31,7 +31,6 @@ describe User do
   describe "#retrieve_or_create" do
 
     before(:each) do
-      # @auth_hash = {uid: '12345', provider: 'twitter', nickname: 'eshizzle'}
       @auth_hash = OpenStruct.new(uid: '12345', provider: 'twitter', info: OpenStruct.new(nickname: 'eshizzle') )
     end
 
@@ -49,6 +48,26 @@ describe User do
       existing_user = User.retrieve_or_create(@auth_hash)
       existing_user.should be_valid
       existing_user.should eql users(:user_1)
+    end
+  end
+
+  describe "#get_tweets" do
+
+    # esdy: This test needs to be changed so that it doesn't retrieve live tweets from @senatorlobster.
+
+    before(:each) do
+      @auth_hash = OpenStruct.new(uid: '2371956894', provider: 'twitter', info: OpenStruct.new(nickname: 'senatorlobster') )
+    end
+
+    it "returns all tweets to @Taskaroo, @tkroo, and @tskroo" do
+      user = User.retrieve_or_create(@auth_hash)
+      # result.should =~ ["@tkroo Buy milk", "@tskroo write intro speech", "@Taskeroo email Sandra", "Need to pick up RUT @TKroo", "This was bizarre."]
+      Rails.logger.info "Here are the test tweets: #{user.get_tweets.inspect}"
+      user.get_tweets.should =~ ["@tkroo Buy milk!"]
+    end
+
+    it "returns an array of the text that was tweeted to Taskaroo" do
+
     end
   end
 end

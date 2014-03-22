@@ -76,6 +76,9 @@ gem 'sidekiq'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
 gem 'turbolinks'
 
+# Use twitter to interface with Twitter API using Ruby.
+gem 'twitter'
+
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 
@@ -84,9 +87,6 @@ gem 'uglifier', '>= 1.3.0'
 
 # Use Devise-twitter to connect Devise to Twitter.
 # gem 'devise-twitter'
-
-# Use twitter to interface with Twitter API using Ruby.
-# gem 'twitter'
 
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'

@@ -2,6 +2,7 @@ class TasksController < ApplicationController
 
   before_filter :authenticate_user
   before_filter :get_task, only: [:edit, :destroy]
+  # before_filter :get_tasks_from_twitter, only: [:index]
   # before_filter :get_task, only: [:show, :edit, :destroy]
 
   def index

@@ -14,6 +14,9 @@
         <tr>
           <th>Done?</th>
           <th>Task</th>
+          <th></th>
+          <th></th>
+          <th></th>
           <th>List</th>
         </tr>
       </thead>
@@ -22,9 +25,10 @@
           <tr id="row-<%= task.id %>">
             <td><input type="checkbox"></td>
             <td><%= task.description %></td>
-            <td><%= task.list.name %></td>
             <td><%= link_to "Edit", edit_task_path(task) %></td>
             <td><%= link_to "Delete", [task], :method => :delete %></td>
+            <td></td>
+            <td><%= task.list.name %></td>
           </tr>
         <% end %>
       </tbody>

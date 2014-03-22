@@ -20,4 +20,27 @@ class User < ActiveRecord::Base
         :nickname => auth_hash.info.nickname )
     end 
   end
+
+  def get_tweets
+    client = setup_twitter_client
+    tweets = client.user_timeline(self.nickname)
+    # logger.info "Tweets: #{tweets.inspect}"
+    # logger.info "Methods: #{tweets.first.methods}"
+    # logger.info "Hash: #{tweets.first.to_h.inspect}"
+    tkroo_user_id = 2391196387
+    # :in_reply_to_user_id
+    tkroo_tweets = tweets.select{ |n| n.text if n.in_reply_to_user_id == tkroo_user_id }.map{ |n| n.text }
+    logger.info "tkroo_tweets: #{tkroo_tweets.inspect}"
+    tkroo_tweets
+  end
+
+  private
+
+  def setup_twitter_client
+    Twitter::REST::Client.new do |config|
+      config.consumer_key        = ENV["TWITTER_CONSUMER_KEY"]
+      config.consumer_secret     = ENV["TWITTER_CONSUMER_SECRET"]
+    end
+  end
+
 end
