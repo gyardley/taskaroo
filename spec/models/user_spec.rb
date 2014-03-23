@@ -61,9 +61,9 @@ describe User do
 
     it "returns all tweets to @Taskaroo, @tkroo, and @tskroo" do
       user = User.retrieve_or_create(@auth_hash)
-      # result.should =~ ["@tkroo Buy milk", "@tskroo write intro speech", "@Taskeroo email Sandra", "Need to pick up RUT @TKroo", "This was bizarre."]
       Rails.logger.info "Here are the test tweets: #{user.get_tweets.inspect}"
-      user.get_tweets.should =~ ["@tkroo Buy milk!"]
+      # user.get_tweets.should =~ ["@tkroo Buy milk!"]
+      user.get_tweets.should =~ ["@tkroo Buy milk!", "@tskroo write intro speech", "@Taskaroo call Aunt Shelly", "Need to pick up RUT @TKroo"]
     end
 
     it "returns an array of the text that was tweeted to Taskaroo" do

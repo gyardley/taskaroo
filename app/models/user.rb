@@ -8,6 +8,11 @@ class User < ActiveRecord::Base
 
   validates :provider, :uid, :nickname, presence: true
 
+  # TKROO_UID = 2391196387
+  # TSKROO_UID = 2391203947
+  # TASKAROO_UID = 2393079374
+  # TASKAROO_USER_IDS = [ TKROO_UID, TSKROO_UID, TASKAROO_UID ]
+
   def self.retrieve_or_create(auth_hash)
     existing_user = User.where(:provider => auth_hash.provider, :uid => auth_hash.uid).first
 
@@ -24,14 +29,12 @@ class User < ActiveRecord::Base
   def get_tweets
     client = setup_twitter_client
     tweets = client.user_timeline(self.nickname)
-    # logger.info "Tweets: #{tweets.inspect}"
-    # logger.info "Methods: #{tweets.first.methods}"
-    # logger.info "Hash: #{tweets.first.to_h.inspect}"
-    tkroo_user_id = 2391196387
-    # :in_reply_to_user_id
-    tkroo_tweets = tweets.select{ |n| n.text if n.in_reply_to_user_id == tkroo_user_id }.map{ |n| n.text }
-    logger.info "tkroo_tweets: #{tkroo_tweets.inspect}"
-    tkroo_tweets
+
+    tweets.select do |tweet|
+      tweet.user_mentions.select do |mention|
+        TASKAROO_UIDS.include? mention.id
+      end.length > 0 ? true : false
+    end.map{ |tweet| tweet.text }
   end
 
   private
