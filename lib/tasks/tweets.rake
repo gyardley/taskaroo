@@ -9,12 +9,10 @@ end
 class Mentions
 
   def self.client
-    puts "self.client"
     @client || set_up_twitter_client
   end
 
   def self.fetch_tweets
-    puts "self.fetch_tweets"
     texts = []
     mentions = self.client.mentions_timeline
 
@@ -24,10 +22,8 @@ class Mentions
   end
 
   def self.add_tasks
-    puts "self.add_tasks"
     self.fetch_tweets.each do |username, task|
-      puts "in the loop"
-      if user = User.find_by(nickname: 'gyardley') # should be nickname: username
+      if user = User.find_by(nickname: 'gyardley') # should be nickname: username, put it this way to test
         puts "Adding task to @#{username}: #{task}"
         Task.create!(list: user.lists.first, description: task)
       end
